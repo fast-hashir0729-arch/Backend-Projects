@@ -27,7 +27,7 @@ A simple RESTful CRUD API built with FastAPI for managing tasks. This project wa
 ### 1. Clone the repository
 
 ```bash
-git clone <https://github.com/fast-hashir0729-arch/Internship-Tasks.git>
+git clone https://github.com/fast-hashir0729-arch/Internship-Tasks.git
 ```
 
 ### 2. Navigate into the project
