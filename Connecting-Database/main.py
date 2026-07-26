@@ -1,5 +1,6 @@
 from fastapi import FastAPI, HTTPException, status
 from pydantic import BaseModel, Field
+from typing import Optional
 import sqlite3
 
 app = FastAPI(title = "Task API", description="A simple CRUD API for managing tasks using FastAPI.", version="1.0.0")
@@ -38,11 +39,17 @@ class TaskUpdate(BaseModel):
     done: bool
 
 @app.get("/tasks")
-def get_tasks():
-    cursor.execute("SELECT * FROM tasks")
-    allTasks = cursor.fetchall()
+def get_tasks(search: Optional[str] = None, done: Optional[bool] = None):
+
+    if search:
+        cursor.execute("SELECT * FROM tasks WHERE title LIKE ?", (f"%{search}%",))
+    else:
+        cursor.execute("SELECT * FROM tasks")
+
+    data = cursor.fetchall()
+
     tasks = []
-    for row in allTasks:
+    for row in data:
         task = dict(row)
         task["done"] = bool(task["done"])
         tasks.append(task)
