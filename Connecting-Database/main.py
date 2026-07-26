@@ -33,6 +33,9 @@ if rowCount == 0:
 class TaskCreate(BaseModel):
     title: str 
 
+class TaskUpdate(BaseModel):
+    title: str
+    done: bool
 
 @app.get("/tasks")
 def get_tasks():
@@ -83,3 +86,40 @@ def create_task(task: TaskCreate):
         "title": task.title,
         "done": False
     }
+
+
+@app.put("/tasks/{id}")
+def update_task(id: int, updated_task: TaskUpdate):
+    cursor.execute("UPDATE tasks SET title = ?, done = ? WHERE id = ?", (updated_task.title, updated_task.done, id))
+
+    if cursor.rowcount == 0:
+        raise HTTPException(
+            status_code=404,
+            detail=f"Task {id} not found"
+        )
+    else:
+        connection.commit()
+        return {
+            "id": id,
+            "title": updated_task.title,
+            "done": updated_task.done
+        }
+
+
+@app.delete("/tasks/{id}")
+def delete_task(id: int):
+
+    cursor.execute("SELECT * FROM tasks WHERE id = ?", (id,))
+    task = cursor.fetchone()
+
+    if task == None:
+        raise HTTPException(
+            status_code=404,
+            detail=f"Task {id} not found"
+        )
+
+    cursor.execute("DELETE FROM tasks WHERE id = ?", (id,))
+
+    connection.commit()
+
+    return task
