@@ -1,7 +1,8 @@
 from fastapi import FastAPI, HTTPException, status
 from pydantic import BaseModel, Field
 
-app = FastAPI(title = "Task API", description="A simple CRUD API for managing tasks using FastAPI.", version="1.0.0");
+
+app = FastAPI(title = "Task API", description="A simple CRUD API for managing tasks using FastAPI.", version="1.0.0")
 
 
 tasks = [
@@ -126,8 +127,6 @@ def create_task(task: TaskCreate):
     summary="Update a task",
     description="Updates the title and completion status of an existing task."
 )
-
-
 def update_task(id: int, updated_task: TaskUpdate):
 
     for task in tasks:
