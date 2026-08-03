@@ -119,7 +119,7 @@ A sample configuration is provided in `.env.example`.
 Clone the repository.
 
 ```bash
-git clone https://github.com/fast-hashir0729-arch/Internship-Tasks.git/tree/main/CRUD-Operations
+git clone https://github.com/fast-hashir0729-arch/Internship-Tasks/tree/main/Containerize%20Your%20Stack
 ```
 
 Move into the project.
