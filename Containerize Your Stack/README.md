@@ -100,17 +100,17 @@ Because of this separation, only the **repository layer** was changed when switc
 
 ---
 
-# Environment Variables
-
-Create a `.env` file.
-
-Example:
-
-```env
-DATABASE_URL=postgresql://postgres:password@db:5432/tasks_db
-```
+## Environment Variables
 
 A sample configuration is provided in `.env.example`.
+
+Create your own `.env` file by copying it:
+
+```bash
+cp .env.example .env
+```
+
+Then update the values according to your local environment before running the application.
 
 ---
 
